@@ -15,7 +15,11 @@ const allowedOrigins = (process.env.CLIENT_ORIGIN)
   .split(',')
   .map((o) => o.trim());
 
-app.use(cors({ origin: allowedOrigins, credentials: true }));
+app.use(cors({
+  origin: allowedOrigins, // Allow only your frontend
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true
+}));
 app.use(express.json({ limit: '1mb' }));
 
 app.get('/api/health', (req, res) => {
